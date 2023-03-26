@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
+ {% load static %}
 
-{% block title %}ResearchLog{% endblock title %}
+{% block title %}Research Log{% endblock title %}
 
 {% block content %}
-<h1>ResearchLog</h1>
+<h1></h1>
 {% endblock content %}
+{% block style %}
+<link rel='stylesheet' href="{% static 'style1.css' %}"
+{% endblock %}
 
