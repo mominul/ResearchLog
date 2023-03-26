@@ -5,7 +5,7 @@
     Login to your account
 {% endblock %}
 
-<body>
+{% block content %}
     <div class="center">
         <h1>login</h1>
         <from method="post">
@@ -24,10 +24,4 @@
             </div>
         </from>
     </div>
-</body>
-
-<ul>
-    <li><a class="active" href="#home">Home</a></li>
-    {% block navbar %}
-    {% endblock %}
-  </ul> 
+{% endblock content %}
