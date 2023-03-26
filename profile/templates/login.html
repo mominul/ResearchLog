@@ -1,3 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
-<p>Login page</p>
+
+{% block title %}
+    Login to your account
+{% endblock %}
+
+<body>
+    <div class="center">
+        <h1>login</h1>
+        <from method="post">
+            <div class="txt_field">
+                <input type="text" required>
+                <label>Email</label>
+            </div>
+            <div class="txt_field">
+                <input type="password" required>
+                <label>Password</label>
+            </div>
+            <div class="pass">Forgot Password?</div>
+            <input type="submit" value="Login">
+            <div class="signup_link">
+                New to ResearchLog?   <a href="#"> Signup</a>
+            </div>
+        </from>
+    </div>
+</body>
+
+<ul>
+    <li><a class="active" href="#home">Home</a></li>
+    {% block navbar %}
+    {% endblock %}
+  </ul> 
