@@ -28,15 +28,16 @@
       <div class="content">
       <div class="logo"><a href="#">ResearchLog</a></div>
         <ul class="links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">SignIn</a></li>
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'login' %}">SignIn</a></li>
           <li>
-            <label>SignUp</label>
+            <a href="#">SignUp</a>
           </li>
           <li>
-            <label >About</label>
+            <a >About</a>
             </ul>
           </li>
+          {% block navbar %}{% endblock  %}
         </ul>
       </div>
       <label for="show-search" class="search-icon"><i class="fas fa-search"></i></label>
