@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block style %}
+<link rel='stylesheet' href="{% static 'login.css' %}">
+{% endblock %}
+
 {% block title %}
     Login to your account
 {% endblock %}
@@ -25,3 +29,5 @@
         </from>
     </div>
 {% endblock content %}
+
+
