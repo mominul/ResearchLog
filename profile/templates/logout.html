@@ -1,10 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block style %}
+<link rel='stylesheet' href="{% static 'login.css' %}">
+<link rel='stylesheet' href="{% static 'style.css' %}">
+{% endblock %}
+
+
 {% block title %}
       logout
 {% endblock title %}
 
 {% block content %}
-    Logout Successful
+    <div class="center">
+        <h1>logout Successful</h1>
+        <from method="post">
+            <div class="signup_link">
+                Sign in again to ResearchLog?   <a href="#"> Signin</a>
+            </div>
+            <div class="signup_link">
+                Create new to ResearchLog?   <a href="#"> Signup</a>
+            </div>
+        </from>
+    </div>
 {% endblock %}
