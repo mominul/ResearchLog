@@ -16,7 +16,7 @@
         <li>
           <a href="index.html" class="brand">
             <img src="https://allresultnet.com/wp-content/uploads/2019/05/University_of_Asia_Pacific.png" alt="The University Of Asia Pacific Logo" />
-            <h3>ResearchLog</h3>
+            <h3 href="">ResearchLog</h3>
           </a>
         </li>
       </ul>
@@ -24,7 +24,7 @@
         <span class="material-icons-outlined" title="Account">
           account_circle
         </span>
-        <a href="signup.html">Signup</a>
+        <a href="{% url 'signup' %}"> Signup</a>
         <!-- <span class="material-icons-outlined" title="Logout"> logout </span> -->
       </div>
     </nav>
@@ -67,7 +67,7 @@
             </div>
 
             <div class="info">
-              Already have an account? <a href="login.html">Login</a> instead.
+              Already have an account? <a href="{% url 'login' %}">Login</a> instead.
             </div>
           </form>
         </div>
