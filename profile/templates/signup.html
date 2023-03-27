@@ -1,16 +1,17 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+
+    {% comment %} <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> {% endcomment %}
+    {% block style %}
     <link rel="stylesheet" href="{% static 'psstyle.css' %}">
+    {% endblock style %}
+    
     
 
-  </head>
-  <body>
-    <!-- Navigatin Bar -->
+
+    {% comment %} <!-- Navigatin Bar -->
     <nav class="nav">
       <ul>
         <li>
@@ -27,8 +28,9 @@
         <a href="signup.html">Signup</a>
         <!-- <span class="material-icons-outlined" title="Logout"> logout </span> -->
       </div>
-    </nav>
+    </nav> {% endcomment %}
 
+  {% block content %}
     <main class="main">
       <div class="container">
         <h1>Create an account</h1>
@@ -75,5 +77,4 @@
     </main>
 
     <script src="./scripts/script.js"></script>
-  </body>
-</html>
+{% endblock content %}
