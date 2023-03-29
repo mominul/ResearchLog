@@ -1,16 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Material+Icons+Outlined");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
 body{
-    margin-top:20px;
+    margin-top:25px;
     color: #1a202c;
     text-align: left;
     background-color: #e2e8f0;    
 }
 .main-body {
-    padding: 15px;
+    padding: 65px;
 }
+
 .card {
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
 }
 
 .card {
@@ -75,10 +77,7 @@ padding: 0;
 margin: 0 14px 0 0;
 }
 
-
-
-
-
+/* 
 
 :root {
     --bodyBackground: #f2f4f8;
@@ -88,23 +87,23 @@ margin: 0 14px 0 0;
     --fontPrimary: #002333;
     --active: #2dbf64;
   }
-  
-  * {
+   */
+  /* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     color: var(--fontPrimary);
     font-family: "Montserrat", sans-serif;
   }
-  
-  body {
+   */
+  /* body {
     background-color: var(--bodyBackground);
   }
   
   a {
     text-decoration: none;
     color: blue;
-  }
+  } */
   
   h4 {
     color: #7c83a7;
@@ -118,7 +117,7 @@ margin: 0 14px 0 0;
     margin-top: 1rem;
     text-align: center;
   }
-  
+/*   
   .error {
     background-color: var(--dangerRed);
     padding: 0.6rem 1.2rem;
@@ -127,7 +126,8 @@ margin: 0 14px 0 0;
     display: flex;
     align-items: center;
   }
-  
+   */
+/*    
   .column {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -139,8 +139,8 @@ margin: 0 14px 0 0;
       grid-template-columns: 1fr;
     }
   }
-  
-  /* nav component */
+   */
+/*   
   .nav {
     display: flex;
     background-color: #fff;
@@ -151,7 +151,8 @@ margin: 0 14px 0 0;
     border-bottom: 1px solid #e5e5e5;
     z-index: 1;
   }
-  
+   */
+/*    
   .nav ul {
     width: 50%;
     height: 60px;
@@ -185,14 +186,15 @@ margin: 0 14px 0 0;
     width: 32px;
     margin-right: 10px;
   }
-  
+   */
+/*    
   @media only screen and (max-width: 600px) {
     .nav .brand h3 {
       display: none;
     }
   }
-  
-  /* layout component */
+   */
+/*   
   .main {
     width: 100%;
     padding: 4rem 0;
@@ -203,7 +205,6 @@ margin: 0 14px 0 0;
     margin: 2rem auto;
   }
   
-  /* text input component */
   .textInput {
     width: 100%;
     height: 50px;
@@ -214,7 +215,8 @@ margin: 0 14px 0 0;
     border: 1px solid #e5e5e5;
     padding: 2px;
   }
-  
+   */
+/*    
   .textInput input {
     border: none;
     outline: none;
@@ -225,7 +227,7 @@ margin: 0 14px 0 0;
     font-size: 16px;
     font-weight: 500;
   }
-  
+   */
   .textInput span {
     width: 40px;
     height: 40px;
@@ -260,8 +262,8 @@ margin: 0 14px 0 0;
   .button:hover span {
     color: #fff;
   }
-  
-  /* account component */
+/*   
+ 
   .account {
     width: 50%;
     display: flex;
@@ -276,17 +278,14 @@ margin: 0 14px 0 0;
     cursor: pointer;
   }
   
-  /* signup component */
   .signup {
     height: 500px;
   }
   
-  /* login component */
   .login {
     height: 330px;
   }
   
-  /* illustration component */
   .illustration {
     padding: 5rem 2rem;
   }
@@ -294,14 +293,14 @@ margin: 0 14px 0 0;
   .illustration img {
     max-width: 80%;
   }
-  
+   */
+/*    
   @media only screen and (max-width: 1023px) {
     .illustration {
       display: none;
     }
   }
   
-  /* form component */
   .form {
     display: grid;
     grid-template-columns: 1fr;
@@ -321,4 +320,4 @@ margin: 0 14px 0 0;
     .form {
       grid-template-columns: 1fr;
     }
-  }
+  } */
