@@ -19,9 +19,14 @@
     <form method="post">
       {% csrf_token %}
       <div class="txt_field">
-        <input type="text" name="username" required>
+        <input type="text" name="fname" required>
         <span></span>
-        <label>Enter your name</label>
+        <label>Enter your first name</label>
+      </div>
+      <div class="txt_field">
+        <input type="text" name="lname" required>
+        <span></span>
+        <label>Enter your last name</label>
       </div>
       <div class="txt_field">
         <input type="text" name="email" required>
