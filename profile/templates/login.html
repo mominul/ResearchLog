@@ -17,13 +17,14 @@
 <div class="center">
     <h1>Login</h1>
     <form method="post">
+      {% csrf_token %}
       <div class="txt_field">
-        <input type="text" required>
+        <input type="text" name="email" required>
         <span></span>
         <label>Email</label>
       </div>
       <div class="txt_field">
-        <input type="password" required>
+        <input type="password" name="psw" required>
         <span></span>
         <label>Password</label>
       </div>
