@@ -75,6 +75,7 @@ def profile_view(request):
             profile.save()
             user.save()
             print("Saved!")
+            return redirect('/profile')
         else:
             profile = None
             user = User.objects.get(id=request.user.id)
