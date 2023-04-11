@@ -71,7 +71,7 @@
             </div>
             <form method="post">
             {% csrf_token %}
-            <div class="col-md-8">
+            <div class="col-md-12">
               <div class="card mb-3">
                 <div class="card-body">
                   <div class="row">
@@ -79,15 +79,16 @@
                       <h6 class="mb-0">First Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                     <input type="text" name="fname" value="{{ fname }}">
+                     <input style="border:0px" type="text" name="fname" value="{{ fname }}">
                     </div>
                   </div>
+                  <hr>
                   <div class="row">
                      <div class="col-sm-3">
                        <h6 class="mb-0">Last Name</h6>
                      </div>
                      <div class="col-sm-9 text-secondary">
-                      <input type="text" name="lname" value={{ lname }}>
+                      <input style="border:0px"  type="text" name="lname" value={{ lname }}>
                      </div>
                    </div>
                   <hr>
@@ -96,7 +97,7 @@
                       <h6 class="mb-0">Description</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                     <input type="text" name="desc" value="{{ desc }}">
+                     <input style="border:0px"  type="text" name="desc" value="{{ desc }}">
                     </div>
                   </div>
                   <hr>
@@ -105,7 +106,7 @@
                       <h6 class="mb-0">Google Scholar ID</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                     <input type="text" name="scholar_id" value="{{ scholar_id }}">
+                     <input style="border:0px"  type="text" name="scholar_id" value="{{ scholar_id }}">
                     </div>
                   </div>
                   <hr>
@@ -114,7 +115,7 @@
                       <h6 class="mb-0">Github</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                     <input type="text" name="gh_id" value="{{ gh_id }}">
+                     <input style="border:0px"  type="text" name="gh_id" value="{{ gh_id }}">
                     </div>
                   </div>
                   <hr>
