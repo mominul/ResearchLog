@@ -8,8 +8,8 @@ def login_page(request):
         if request.method == 'POST':
             email = request.POST['email']
             password = request.POST['psw']
-
-            if User.objects.filter(email=email):
+            
+            if User.objects.filter(email=email).exists():
                 user = User.objects.get(email=email)
                 if user.check_password(password):
                     login(request, user)
