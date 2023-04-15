@@ -95,7 +95,7 @@ def profile_view(request):
                 'scholar_id': profile.scholar_id,
                 'gh_id': profile.gh_id,
             }
-            print(data)
+            print(data, user.id)
 
 
     return render(request, "profile_user.html", data)
