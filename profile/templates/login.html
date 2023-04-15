@@ -1,21 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 {% block style %}
 <link rel='stylesheet' href="{% static 'login.css' %}">
 <link rel='stylesheet' href="{% static 'style1.css' %}">
-{% endblock %}
 
+{% for message in messages %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong></strong> {{ message }}
+</div>
+{% endfor %}
+{% comment %} <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert"> {% endcomment %}
+
+
+
+
+{% endblock %}
 
 {% block title %}
     Login to your account
+{% endblock  %} 
+{% block body %}
 {% endblock %}
 {% block navbar %}
 
-{% endblock  %}
+{% endblock %} 
+	
 {% block content %}
 <div class="center">
-    <h1>Login</h1>
+  <h1>Login</h1> 
     <form method="post">
       {% csrf_token %}
       <div class="txt_field">
@@ -28,13 +46,20 @@
         <span></span>
         <label>Password</label>
       </div>
-      <div class="pass">Forgot Password?</div>
+      {% comment %} <div class="pass">Forgot Password?</div> {% endcomment %}
       <input type="submit" value="Login">
       <div class="signup_link">
         New to ResearchLog? <a href="{% url 'signup' %}">Signup</a>
       </div>
     </form>
   </div>
+<script>
+    setTimeout(function(){
+      if ($('#msg').length > 0) {
+      $('#msg').remove();
+      }
+    }, 2000)
+</script> 
 {% endblock content %}
 
 
