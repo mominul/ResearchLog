@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from home.views import home_view
 import profile.views as profile_view
+from journals.views import category
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('logout/',profile_view.logout_page, name='logout'),
     path('signup/',profile_view.signup_view, name='signup'),
     path('profile/',profile_view.profile_view, name='profile'),
+    path('category/',category, name='category')
 ]
