@@ -49,7 +49,7 @@ def signup_view(request):
             return redirect('/')
     return render(request, "signup.html")
 
-def profile_view(request):
+def profile_update_view(request):
     data = {}
     if request.user.is_authenticated:      
         if request.method == 'POST':
@@ -75,7 +75,7 @@ def profile_view(request):
             profile.save()
             user.save()
             print("Saved!")
-            return redirect('/profile')
+            return redirect(f'/profile/{user.id}')
         else:
             profile = None
             user = User.objects.get(id=request.user.id)
@@ -99,3 +99,29 @@ def profile_view(request):
 
 
     return render(request, "profile_user.html", data)
+
+def profile_view(request, id):
+    profile = None
+    user = User.objects.get(id=id)
+    
+    # Only the logged in user can update his profile
+    can_update = id == request.user.id
+
+    if Profile.objects.filter(user=id):
+        profile = Profile.objects.get(user=user)
+    else:
+        profile = Profile()
+        print("not found")
+
+    data = {
+        'can_update': can_update,
+        'name': user.first_name + ' ' + user.last_name,
+        'fname': user.first_name,
+        'lname': user.last_name,
+        'desc': profile.description,
+        'email': user.email,
+        'scholar_id': profile.scholar_id,
+        'gh_id': profile.gh_id,
+    }
+
+    return render(request, 'profile.html', data)
