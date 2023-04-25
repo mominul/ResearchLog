@@ -2,8 +2,10 @@ from django.shortcuts import redirect, render, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from profile.models import Profile
+from django.contrib import messages
 
 def login_page(request):
+    
     if not request.user.is_authenticated:      
         if request.method == 'POST':
             email = request.POST['email']
@@ -13,14 +15,15 @@ def login_page(request):
                 user = User.objects.get(email=email)
                 if user.check_password(password):
                     login(request, user)
-                    print("LogIn Successfull")
+                    # print("LogIn Successfull")
                     return redirect('/')
             else:
+                messages.error(request, "username or password maybe incorrect")
                 print("username or password maybe incorrect")
                 return redirect('/login')
 
-        return render(request, "login.html")
-    return render(request, 'login.html')
+        return render(request, 'login.html')
+    
 def logout_page(request):
     if request.user.is_authenticated:
         logout(request)
