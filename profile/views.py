@@ -15,11 +15,11 @@ def login_page(request):
                 user = User.objects.get(email=email)
                 if user.check_password(password):
                     login(request, user)
-                    # print("LogIn Successfull")
                     return redirect('/')
+                else:
+                    messages.error(request, "Incorrect password!")
             else:
-                messages.error(request, "username or password maybe incorrect")
-                print("username or password maybe incorrect")
+                messages.error(request, "Unknown email, please signup first!")
                 return redirect('/login')
 
         return render(request, 'login.html')
@@ -40,11 +40,11 @@ def signup_view(request):
             password2 = request.POST['psw-repeat']
             
             if User.objects.filter(email=email):
-                print("Emali already registered!")
+                messages.error(request, "Emali already registered!")
                 return redirect('/signup')
                         
             if password1 != password2:
-                print("Password didn't match!")
+                messages.error(request, "Password didn't match!")
                 return redirect('/signup')
 
             newuser = User.objects.create_user(username, email, password1, first_name=fname, last_name=lname)
@@ -98,9 +98,7 @@ def profile_update_view(request):
                 'scholar_id': profile.scholar_id,
                 'gh_id': profile.gh_id,
             }
-            print(data, user.id)
-
-
+    
     return render(request, "profile_user.html", data)
 
 def profile_view(request, id):
