@@ -1,3 +1,25 @@
+
 {% extends 'base.html' %}
 {% load static %}
 
+{% block content %}
+    <div>
+        <h1>Category :</h1>
+        <input list="Games">
+        <datalist id="Games">
+            {% for cat in category %}
+            <option value="{{ cat }}">
+            {% endfor %}
+        </datalist> 
+    </div>
+
+    <div>
+        <h1>Publication :</h1>
+        <table border="1" cellpadding="5">
+            {% for pub in title %}
+            <tr>
+                <td> {{ pub }}</td>
+               </tr>
+            {% endfor %}
+    </div>
+{% endblock content %}
