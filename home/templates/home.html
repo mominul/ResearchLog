@@ -9,9 +9,11 @@
 
 {% block content %}
 <div class="dummy-text">
-    <h1>FIND YOUR RESEARCH </h1>
-
-  </div>
+  <h3>Categories:</h3>
+  {% for cat in category %}
+  <p>{{ cat }}</p>
+  {% endfor %}
+</div>
 {% endblock content %}
 
 {% block style %}

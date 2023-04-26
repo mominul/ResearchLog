@@ -1,5 +1,13 @@
 from django.shortcuts import render, HttpResponse
+from journals.models import Category
 
 def home_view(request):
-    # return HttpResponse("<h1>Hi</h1>")
-    return render(request, 'home.html')
+    category = []
+    for cat in Category.objects.all():
+        category.append(cat.category)
+
+    data = {
+        "category": category,
+    }
+
+    return render(request, 'home.html', data)
