@@ -3,7 +3,7 @@ from journals.models import Publication, Category, Authorship
 from django.contrib.auth.models import User
 
 # Create your views here.
-def category(request):
+def publications_view(request):
     cate=[]
     for i in Category.objects.all():
         cate.append(i.category)
@@ -17,15 +17,20 @@ def category(request):
         users=[]
 
         for j in authors.all():
-            users.append(j.user.first_name)
+            users.append({
+                "name": f"{j.user.first_name} {j.user.last_name}",
+                "id": j.user.id
+            })
+        
         pub_lst = {
-                "users":users,
-                "title":j.publication.title
-            }
+            "authors":users,
+            "title":i.title,
+            "desc": i.description,
+        }
         pub.append(pub_lst)
 
     data = {
         "category":cate,
-        "title":pub
+        "publications":pub
     }
     return render(request, "list.html",data)
