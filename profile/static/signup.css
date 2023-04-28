@@ -112,15 +112,36 @@ input[type="submit"]:hover{
   text-decoration: underline;
 }
 .signin_link{
-    margin: 30px 0;
-    text-align: center;
-    font-size: 16px;
-    color: #666666;
-  }
-  .signin_link a{
-    color: #2691d9;
-    text-decoration: none;
-  }
-  .signin_link a:hover{
-    text-decoration: underline;
-  }
+  margin: 30px 0;
+  text-align: center;
+  font-size: 16px;
+  color: #666666;
+}
+.signin_link a{
+  color: #2691d9;
+  text-decoration: none;
+}
+.signin_link a:hover{
+  text-decoration: underline;
+}
+
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
