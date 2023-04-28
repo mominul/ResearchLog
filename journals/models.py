@@ -8,6 +8,7 @@ class Category(models.Model):
 class Publication(models.Model):
     title=models.TextField()
     description=models.TextField(null=True)
+    frond_pic=models.ImageField(upload_to='publications/',null=True, blank=True)
     pdf=models.FileField(upload_to='publications/',null=True, blank=True)
     is_approved= models.BooleanField()
     category=models.ForeignKey(Category,on_delete=models.CASCADE)

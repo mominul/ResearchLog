@@ -61,7 +61,7 @@ def profile_update_view(request):
             desc = request.POST['desc']
             scholar_id = request.POST['scholar_id']
             gh_id = request.POST['gh_id']
-
+            
             profile = None
 
             if Profile.objects.filter(user_id= request.user.id):
