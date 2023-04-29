@@ -34,3 +34,6 @@ def publications_view(request):
         "publications":pub
     }
     return render(request, "list.html",data)
+
+def upload_publication(request):
+    return render(request, 'upload.html')
