@@ -7,6 +7,13 @@
 {% block style %}
 <link rel="stylesheet" href="{% static 'psstyle.css' %}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
 {% endblock %}
 
 {% block content %}
@@ -70,11 +77,14 @@
               </div>
             </div>
             <form method="post">
-            {% csrf_token %}
+                 {% csrf_token %}
             <div class="col-md-12">
               <div class="card mb-3">
+               
                 <div class="card-body">
+                  
                   <div class="row">
+                     
                     <div class="col-sm-3">
                       <h6 class="mb-0">First Name</h6>
                     </div>
@@ -132,11 +142,48 @@
                     <div class="col-sm-12">
                       {% comment %} <a class="btn btn-info " target="__blank" href="#">Update</a> {% endcomment %}
                       <input class="btn btn-info " type="submit" value="Update">
+                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add journal</button>
                     </div>
                   </div>
+              
+              
+                
                 </div>
+
               </div>
             </form>
+ 
+          <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog">
+              
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                   
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action={% url 'upload_journal' %} enctype="multipart/form-data" >
+                      {% csrf_token %}
+                     <p>title</p>
+                     <input type='text' name='title'>
+                     <p>file</p>
+                     <input type='file' name='pdf'>
+                     <br>
+                     <button class="btn btn-default"  type='submit'>add</button>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          
+
+
 
               <div class="row gutters-sm">
                 <div class="col-sm-12 mb-3">
