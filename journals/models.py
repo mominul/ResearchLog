@@ -5,12 +5,18 @@ from django.contrib.auth.models import User
 class Category(models.Model):
     category=models.CharField(max_length=250)
 
+    def __str__(self) -> str:
+        return self.category
+
 class Publication(models.Model):
     title=models.TextField()
     description=models.TextField(null=True)
     pdf=models.FileField(upload_to='publications/',null=True, blank=True)
     is_approved= models.BooleanField()
-    category=models.ForeignKey(Category,on_delete=models.CASCADE)
+    category=models.ManyToManyField(Category)
+
+    def __str__(self) -> str:
+        return self.title
     
 
 class Authorship(models.Model):

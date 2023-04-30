@@ -21,7 +21,7 @@
                       <div class="card text-dark bg-light">
                    
                       {% comment %} <img class="card-img-top" src="https://th.bing.com/th/id/R.49b072bef74c871f21f2d576e49bf090?rik=634mkINIw0wsZA&pid=ImgRaw&r=0" alt="image alt text here"> {% endcomment %}
-                   
+                      <a href="{% url 'publications' %}?category={{ cat }}">
                         <div class="card-body text-center">
                    
                           <h5 class="card-title">{{ cat }}</h5>
@@ -29,7 +29,7 @@
                           {% comment %} <p class="card-text text-left"> write something here. </p> {% endcomment %}
                    
                         </div>
-                       
+                      </a>
                   
                         {% comment %} <div class="card-footer bg-success text-right text-danger">
                    

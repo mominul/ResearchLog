@@ -15,7 +15,8 @@
             <div class="col-md-4 mb-3">
               <div class="card">
                 <div class="card-body">
-                    <form action="/action_page.php">
+                    <form method="get">
+                      {% comment %} {% csrf_token %} {% endcomment %}
                         <label for="title">Title:</label>
                         <input type="text" id="title" name="title">
                         <label for="category">Category:</label>
@@ -76,6 +77,12 @@
                                         <div class="meta__row--mobile"><span class="meta__label meta__eissn">Online ISSN: </span><span>1925-3621</span></div> {% endcomment %}
                                         {% for author in pub.authors %}
                                         <span class="meta__label"><a href="{% url 'profile_view' author.id %}">{{ author.name }}</a></span>
+                                        {% endfor %}
+                                     </div>
+                                     <div class="meta__row"><span class="meta__label">Categories: </span></div>
+                                     <div class="meta__row">
+                                        {% for category in pub.categories %}
+                                        <span class="meta__label"><a href="{% url 'publications' %}?category={{ category }}">{{ category }}</a></span>
                                         {% endfor %}
                                      </div>
                                   </div>
