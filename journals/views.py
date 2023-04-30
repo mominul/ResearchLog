@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.shortcuts import render,redirect
 from journals.models import Publication, Category, Authorship
 from django.contrib.auth.models import User
@@ -44,7 +45,7 @@ def publications_view(request):
 def upload_journal(request):
     if request.method == 'POST':
             title = request.POST['title']
-            description = request.POST['description']
+            # description = request.POST['description']
             pdf = request.FILES['pdf']
             pdf_doc = fitz.open(stream=pdf.read(), filetype='pdf')
 
@@ -53,13 +54,16 @@ def upload_journal(request):
 
             # Convert the first page to an image
             image_bytes = first_page.get_pixmap().tobytes()
-
             # Save the image data to the database
-            new_joural=Publication(title=title,description=description,pdf=pdf)
+            new_joural=Publication(title=title,pdf=pdf)
             new_joural.frond_pic.save(f'{title}.png', ContentFile(image_bytes))
             new_joural.save()
+            new_author=Authorship(publication=new_joural)
+            new_author.user=request.user            
+            new_author.save()
+
         
-    return redirect('/uplode-journal')
+    return redirect(reverse('profile_update'))
 
 
 

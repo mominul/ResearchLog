@@ -18,6 +18,8 @@ from django.urls import path
 from home.views import home_view
 import profile.views as profile_view
 from journals.views import publications_view,upload_journal
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +31,5 @@ urlpatterns = [
     path('profile_update/',profile_view.profile_update_view, name='profile_update'),
     path('upload-journal/',upload_journal,name='upload_journal'),
     path('publications/',publications_view, name='publications')
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

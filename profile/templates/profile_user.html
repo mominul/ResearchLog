@@ -167,9 +167,9 @@
                     <form method="POST" action={% url 'upload_journal' %} enctype="multipart/form-data" >
                       {% csrf_token %}
                      <p>title</p>
-                     <input type='text'>
+                     <input type='text' name='title'>
                      <p>file</p>
-                     <input type='file' >
+                     <input type='file' name='pdf'>
                      <br>
                      <button class="btn btn-default"  type='submit'>add</button>
                     </form>

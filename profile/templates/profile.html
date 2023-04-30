@@ -130,12 +130,14 @@
                 <div class="col-sm-12 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
+                     {% for author in authors %}
                           <ul class="rlist search-result__body search-result__publications">
+                           
                             <li class="clearfix separator search__item">
-                               <div class="item__image"><a href="/home/afpa" title="Go to Academic Forensic Pathology"><img src="https://journals.sagepub.com/na101/home/literatum/publisher/sage/journals/content/afpa/2022/afpa_12_4/afpa_12_4/20221215-01/afpa_12_4.cover.png" title="Cover image of Academic Forensic Pathology" alt=""></a></div>
+                               <div class="item__image"><a href="/home/afpa" title="Go to Academic Forensic Pathology"><img src={% if author.publication.frond_pic %}{{author.publication.frond_pic.url}}{% else %}#{% endif %} title="Cover image of Academic Forensic Pathology" alt="My Image"></a></div>
                                <div class="item__body clearfix">
                                   <div class="meta__header"></div>
-                                  <h3 class="heading-search item__title"><a href="/home/afpa">Academic Forensic Pathology</a></h3>
+                                  <h3 class="heading-search item__title"><a href="/home/afpa">{{author.publication.title}}</a></h3>
                                   <div class="item__meta">
                                      <div class="meta__row">
                                         <span class="meta__label">Latest content: </span><span>Volume 12, </span><span>Issue 4, </span>
@@ -150,8 +152,10 @@
                                   </div>
                                </div>
                             </li>
+                            
                          </ul>
                          <hr>
+                         {% endfor %}
                          <ul class="rlist search-result__body search-result__publications">
                           <li class="clearfix separator search__item">
                              <div class="item__image"><a href="/home/afpa" title="Go to Academic Forensic Pathology"><img src="https://journals.sagepub.com/na101/home/literatum/publisher/sage/journals/content/aona/2022/aona_29_2-3/aona_29_2-3/20221116-01/aona_29_2-3.cover.png" title="Cover image of Academic Forensic Pathology" alt=""></a></div>

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from profile.models import Profile
 from django.contrib import messages
+from journals.models import Publication,Authorship
 
 def login_page(request):
     
@@ -104,10 +105,10 @@ def profile_update_view(request):
 def profile_view(request, id):
     profile = None
     user = User.objects.get(id=id)
-    
+    author=Authorship.objects.filter(user=user)
     # Only the logged in user can update his profile
     can_update = id == request.user.id
-
+    
     if Profile.objects.filter(user=id):
         profile = Profile.objects.get(user=user)
     else:
@@ -123,6 +124,7 @@ def profile_view(request, id):
         'email': user.email,
         'scholar_id': profile.scholar_id,
         'gh_id': profile.gh_id,
+        'authors':author,
     }
 
     return render(request, 'profile.html', data)
