@@ -17,67 +17,28 @@
                   <h3>Browse journals by discipline:</h3>
                    
                    <div class="card-group">
-                   
+                    {% for cat in category %}
                       <div class="card text-dark bg-light">
                    
-                      <img class="card-img-top" src="https://th.bing.com/th/id/R.49b072bef74c871f21f2d576e49bf090?rik=634mkINIw0wsZA&pid=ImgRaw&r=0" alt="image alt text here">
+                      {% comment %} <img class="card-img-top" src="https://th.bing.com/th/id/R.49b072bef74c871f21f2d576e49bf090?rik=634mkINIw0wsZA&pid=ImgRaw&r=0" alt="image alt text here"> {% endcomment %}
                    
-                        <div class="card-body ">
+                        <div class="card-body text-center">
                    
-                          <h5 class="card-title">Machine learning</h5>
+                          <h5 class="card-title">{{ cat }}</h5>
                    
-                          <p class="card-text text-left"> write something here. </p>
+                          {% comment %} <p class="card-text text-left"> write something here. </p> {% endcomment %}
                    
                         </div>
                        
                   
-                        <div class="card-footer bg-success text-right text-danger">
+                        {% comment %} <div class="card-footer bg-success text-right text-danger">
                    
                         <a href="#" class="btn btn-outline-light btn-sm">More info</a>
                    
-                        </div>
+                        </div> {% endcomment %}
                    
                     </div>
-                   
-                      <div class="card text-dark bg-light">
-                   
-                      <img class="card-img-top" src="https://th.bing.com/th/id/OIP.s_NXhtrcZ3ewlF1QhBybuQHaEK?pid=ImgDet&w=1600&h=900&rs=1" alt="image alt text here">
-                   
-                        <div class="card-body ">
-                   
-                          <h5 class="card-title">Blockchain</h5>
-                   
-                          <p class="card-text text-left">write something here. </p>
-                   
-                        </div>
-                   
-                          <div class="card-footer bg-success text-right text-danger">
-                   
-                         <a href="#" class="btn btn-outline-light btn-sm">More info</a>
-                   
-                        </div>
-                   
-                    </div>
-                   
-                      <div class="card text-dark bg-light">
-                   
-                      <img class="card-img-top" src="https://th.bing.com/th/id/R.6294f9cb8c459096fea9d4cbe635f927?rik=9Ss09WV0ZGJQaQ&pid=ImgRaw&r=0" alt="image alt text here">
-                   
-                        <div class="card-body ">
-                   
-                          <h5 class="card-title">Holochain</h5>
-                   
-                          <p class="card-text text-left">write something here. </p>
-                   
-                        </div>
-                   
-                          <div class="card-footer bg-success text-right text-danger">
-                   
-                         <a href="#" class="btn btn-outline-light btn-sm">More info</a>
-                   
-                        </div>
-                   
-                    </div>
+                    {% endfor %}
                   
                    
                   </div> 
@@ -90,12 +51,6 @@
                 
               </div>
             </div>
-
-{% comment %} <div class="dummy-text">
- {% for cat in category %}
-  <p>{{ cat }}</p>
-  {% endfor %}
-</div> {% endcomment %}
 {% endblock content %}
 
 
