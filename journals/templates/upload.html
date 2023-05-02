@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block navbar %}
+
+{% endblock  %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'psstyle.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="main-body"> 
+          <div class="row gutters-sm">
+            
+            <form method="post">
+            {% csrf_token %}
+            <div class="col-md-12">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Title</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     <input type="text" name="title">
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                     <div class="col-sm-3">
+                       <h6 class="mb-0">Description</h6>
+                     </div>
+                     <div class="col-sm-9 text-secondary">
+                      <textarea name="desc" rows="5" cols="23"></textarea>
+                     </div>
+                   </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Description</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     <input style="border:0px"  type="text" name="desc" value="{{ desc }}">
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Google Scholar ID</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     <input style="border:0px"  type="text" name="scholar_id" value="{{ scholar_id }}">
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Github</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     <input style="border:0px"  type="text" name="gh_id" value="{{ gh_id }}">
+                    </div>
+                  </div>
+                  <hr>
+                  {% comment %} <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Address</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    
+                    </div>
+                  </div>
+                  <hr> {% endcomment %}
+                  <div class="row">
+                    <div class="col-sm-12">
+                      {% comment %} <a class="btn btn-info " target="__blank" href="#">Update</a> {% endcomment %}
+                      <input class="btn btn-info " type="submit" value="Update">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+              
+
+
+
+            </div>
+          </div>
+
+        </div>
+    </div>
+    {% endblock content %}

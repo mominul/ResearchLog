@@ -65,6 +65,5 @@ def upload_journal(request):
         
     return redirect(reverse('profile_update'))
 
-
-
-
+def upload_publication(request):
+    return render(request, 'upload.html')
