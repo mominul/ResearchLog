@@ -41,12 +41,20 @@ def publications_view(request):
 
     filtered_publications = []
 
-    if request.GET.get("category"):
+    if request.GET.get("category") and request.GET.get("category") != "none":
         for pub in pub_list:
             if request.GET["category"] in pub["categories"]:
                 filtered_publications.append(pub)
     else:
         filtered_publications = pub_list
+
+    if request.GET.get("title"):
+        filtered = []
+        search = request.GET["title"].casefold()
+        for pub in filtered_publications:
+            if search in pub["title"].casefold():
+                filtered.append(pub)
+        filtered_publications = filtered
 
     data = {
         "category":cate,
