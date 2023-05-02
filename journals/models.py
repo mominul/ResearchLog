@@ -6,14 +6,19 @@ from django.contrib.auth.models import User
 class Category(models.Model):
     category=models.CharField(max_length=250)
 
+    def __str__(self) -> str:
+        return self.category
 
 class Publication(models.Model):
     title=models.TextField()
     description=models.TextField(null=True)
-    frond_pic=models.ImageField(upload_to='publications/image',null=True, blank=True)
+    front_pic=models.ImageField(upload_to='publications/image',null=True, blank=True)
     pdf=models.FileField(upload_to='publications/pdf',null=True, blank=True)
     is_approved= models.BooleanField(default=False)
-    category=models.CharField(max_length=250)
+    category=models.ManyToManyField(Category)
+
+    def __str__(self) -> str:
+        return self.title
     
 
 class Authorship(models.Model):

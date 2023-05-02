@@ -9,6 +9,7 @@ from django.core.files.base import ContentFile
 
 # Create your views here.
 def publications_view(request):
+    # print(request.GET["title"], request.GET["category"])
     cate=[]
     for i in Category.objects.all():
         cate.append(i.category)
@@ -17,9 +18,12 @@ def publications_view(request):
     pub_list=[] 
 
     for i in Publication.objects.all():
-        # pub.append(i.title)
         authors = Authorship.objects.filter(publication=i)
         users=[]
+        categories = []
+
+        for c in i.category.all():
+            categories.append(c.category)
 
         for j in authors.all():
             users.append({
@@ -27,16 +31,26 @@ def publications_view(request):
                 "id": j.user.id
             })
         
-        pub_lst = {
+        dict = {
             "authors":users,
             "title":i.title,
             "desc": i.description,
+            "categories": categories,
         }
-        pub.append(pub_lst)
+        pub_list.append(dict)
+
+    filtered_publications = []
+
+    if request.GET.get("category"):
+        for pub in pub_list:
+            if request.GET["category"] in pub["categories"]:
+                filtered_publications.append(pub)
+    else:
+        filtered_publications = pub_list
 
     data = {
         "category":cate,
-        "publications":pub
+        "publications":filtered_publications,
     }
     return render(request, "list.html",data)
 
@@ -56,7 +70,7 @@ def upload_journal(request):
             image_bytes = first_page.get_pixmap().tobytes()
             # Save the image data to the database
             new_joural=Publication(title=title,pdf=pdf)
-            new_joural.frond_pic.save(f'{title}.png', ContentFile(image_bytes))
+            new_joural.front_pic.save(f'{title}.png', ContentFile(image_bytes))
             new_joural.save()
             new_author=Authorship(publication=new_joural)
             new_author.user=request.user            
