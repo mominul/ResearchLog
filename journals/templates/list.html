@@ -21,6 +21,7 @@
                         <input type="text" id="title" name="title">
                         <label for="category">Category:</label>
                         <select id="category" name="category">
+                          <option value="none">None</option>
                           {% for cat in category %}
                           <option value="{{ cat }}">{{ cat }}</option>
                           {% endfor %}
