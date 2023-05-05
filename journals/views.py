@@ -81,3 +81,5 @@ def upload_journal(request):
 
 def upload_publication(request):
     return render(request, 'upload.html')
+def pdf_views(request):
+    return render(request, 'pdfview.html')

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block navbar %}
+
+{% endblock  %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'psstyle.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- Include PDF.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.339/pdf.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="main-body" style="padding: 80px 55px 1px 35px;">
+    <div class="card">   
+      {% comment %} <div class=" d-flex justify-content-left align-items-right h-100">
+        <div class="col col-lg-2 mb-4 mb-lg-0"> {% endcomment %}
+         
+            <div class="row g-5">
+              <div class="col-md-4"
+                style="border-top-center-radius: .5rem; border-bottom-center-radius: .5rem;">
+                <img src="https://journals.sagepub.com/na101/home/literatum/publisher/sage/journals/content/aona/2022/aona_29_2-3/aona_29_2-3/20221116-01/aona_29_2-3.cover.png"alt="Image" class="img-fluid my-3" 
+                style="padding: 19px 75px 1px 35px;width: 100vw;"/>
+                
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-5">
+                  <h6>Title</h6>
+                <hr>
+                <div class="row pt-3">
+                    <div class="col-12 mb-3">
+                      <h6>Author</h6>
+                <hr>
+                
+                  <div class="row pt-3">
+                    <div class="col-10 mb-3">
+                      <h6>Catagory</h6>
+                
+                    </div>
+                   
+                  </div>
+                  
+                </div>
+              </div>
+          
+        
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+
+<div class="main-body" style="padding: 21px 55px 1px 35px;">
+    <div class="card">       
+            <div class="row g-5">
+              <div class="col-md-4"
+                style="border-top-center-radius: .5rem; border-bottom-center-radius: .5rem;">
+                <h1>Description:</h1>
+                <textarea rows="10" cols="100vc" class="para">&lt;p&gt;Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus&lt;/p&gt;
+                    
+                </textarea>
+                
+        
+           
+                
+       
+      </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+    <div class="main-body" style="padding: 19px 55px 1px 35px;" >
+    
+        <div class="card">   
+    <object 
+    
+      data='https://pdfjs-express.s3-us-west-2.amazonaws.com/docs/choosing-a-pdf-viewer.pdf'
+      type="application/pdf"
+      width="100%"
+      height="657"
+     
+    >
+    <iframe src={`${testPdf}#view=fitH`} title="testPdf" height="100%" width="100%" />
+    </object>
+  </div>
+</div>
+</div>
+
+            
+                  
+    {% endblock content %}
