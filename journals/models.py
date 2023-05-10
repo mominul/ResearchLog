@@ -16,6 +16,7 @@ class Publication(models.Model):
     pdf=models.FileField(upload_to='publications/pdf',null=True, blank=True)
     is_approved= models.BooleanField(default=False)
     category=models.ManyToManyField(Category)
+    authors=models.ManyToManyField(User)
 
     def __str__(self) -> str:
         return self.title

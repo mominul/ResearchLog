@@ -35,8 +35,9 @@ def signup_view(request):
         if request.method == "POST":
             fname = request.POST['fname']
             lname = request.POST['lname']
-            username = fname + '_' + lname
             email = request.POST['email']
+            # Use the email's username
+            username = email.split('@')[0]
             password1 = request.POST['psw']
             password2 = request.POST['psw-repeat']
             

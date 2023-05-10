@@ -14,7 +14,7 @@
     <div class="main-body"> 
           <div class="row gutters-sm">
             
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="col-md-12">
               <div class="card mb-3">
@@ -39,28 +39,34 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Description</h6>
+                      <h6 class="mb-0">Co-Authors</h6>
+                    </br>
+                      <h7>Use comma to seperate</h7>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                     <input style="border:0px"  type="text" name="desc" value="{{ desc }}">
+                     <input type="text" name="authors">
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Google Scholar ID</h6>
+                      <h6 class="mb-0">Categories</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                     <input style="border:0px"  type="text" name="scholar_id" value="{{ scholar_id }}">
+                     <select id="categories" name="categories" size="4" multiple>
+                      {% for cat in categories %}
+                      <option value="{{ cat.id }}">{{ cat.category }}</option>
+                      {% endfor %}
+                    </select>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Github</h6>
+                      <h6 class="mb-0">PDF file</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                     <input style="border:0px"  type="text" name="gh_id" value="{{ gh_id }}">
+                     <input style="border:0px"  type="file" name="pdf">
                     </div>
                   </div>
                   <hr>
@@ -74,9 +80,9 @@
                   </div>
                   <hr> {% endcomment %}
                   <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 align-items-center text-center">
                       {% comment %} <a class="btn btn-info " target="__blank" href="#">Update</a> {% endcomment %}
-                      <input class="btn btn-info " type="submit" value="Update">
+                      <input class="btn btn-info " type="submit" value="Submit">
                     </div>
                   </div>
                 </div>
