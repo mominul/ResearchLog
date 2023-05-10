@@ -36,6 +36,7 @@ def publications_view(request):
             "title":i.title,
             "desc": i.description,
             "categories": categories,
+            "image": i.front_pic.url,
         }
         pub_list.append(dict)
 
@@ -124,7 +125,7 @@ def upload_publication(request):
         try:
             pdf = request.FILES['pdf']
             pub.pdf = pdf
-            
+
             pdf_doc = fitz.open(stream=pdf.read(), filetype='pdf')
 
             # Get the first page of the PDF
