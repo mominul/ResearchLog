@@ -32,6 +32,7 @@ def publications_view(request):
             })
         
         dict = {
+            "id": i.pk,
             "authors":users,
             "title":i.title,
             "desc": i.description,
@@ -151,5 +152,27 @@ def upload_publication(request):
         "categories": categories,
     }
     return render(request, 'upload.html', data)
-def pdf_views(request):
-    return render(request, 'pdfview.html')
+
+def view_publication(request, id):
+    pub = Publication.objects.get(id=id)
+
+    authors = []
+    for author in pub.authors.all():
+        authors.append({
+            "id": author.pk,
+            "name": f"{author.first_name} {author.last_name}",
+        })
+    
+    categories = []
+    for category in pub.category.all():
+        categories.append(category.category)
+    
+    data = {
+        "title": pub.title,
+        "desc": pub.description,
+        "authors": authors,
+        "categories": categories,
+        "pdf": pub.pdf.url,
+        "image": pub.front_pic.url,
+    }
+    return render(request, 'pdfview.html', data)

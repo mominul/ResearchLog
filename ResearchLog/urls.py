@@ -20,7 +20,7 @@ import profile.views as profile_view
 from journals.views import publications_view,upload_journal
 from django.conf import settings
 from django.conf.urls.static import static
-from journals.views import upload_publication, pdf_views
+from journals.views import upload_publication, view_publication
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,5 +33,5 @@ urlpatterns = [
     path('upload-journal/',upload_journal,name='upload_journal'),
     path('publications/',publications_view, name='publications'),
     path('publications/upload',upload_publication, name='upload_pub'),
-    path('pdfview', pdf_views, name='pdf_views')
+    path('publications/view/<int:id>', view_publication, name='publication_view')
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
