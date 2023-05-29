@@ -5,7 +5,7 @@
 {% endblock  %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'psstyle.css' %}">
+<link rel="stylesheet" href="{% static 'upload.css' %}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 {% endblock %}
 
@@ -20,39 +20,39 @@
               <div class="card mb-3">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Title</h6>
+                    <div class="col-sm-4">
+                      <h6 class="mb-6">Title</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div class="col-sm-8 text-secondary">
                      <input type="text" name="title">
                     </div>
                   </div>
                   <hr>
                   <div class="row">
-                     <div class="col-sm-3">
-                       <h6 class="mb-0">Description</h6>
+                     <div class="col-sm-4">
+                       <h6 class="mb-5">Description</h6>
                      </div>
-                     <div class="col-sm-9 text-secondary">
-                      <textarea name="desc" rows="5" cols="23"></textarea>
+                     <div class="col-sm-8 text-secondary">
+                      <textarea name="desc" rows="5" cols="24"></textarea>
                      </div>
                    </div>
                   <hr>
                   <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                       <h6 class="mb-0">Co-Authors</h6>
                     </br>
                       <h7>Use comma to seperate</h7>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div class="col-sm-4 text-secondary">
                      <input type="text" name="authors">
                     </div>
                   </div>
                   <hr>
                   <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                       <h6 class="mb-0">Categories</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div class="col-sm-5 text-secondary">
                      <select id="categories" name="categories" size="4" multiple>
                       {% for cat in categories %}
                       <option value="{{ cat.id }}">{{ cat.category }}</option>
