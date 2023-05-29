@@ -63,7 +63,7 @@ def profile_update_view(request):
             desc = request.POST['desc']
             scholar_id = request.POST['scholar_id']
             gh_id = request.POST['gh_id']
-            
+            profile_pic = request.FILES['profile_pic']
             profile = None
 
             if Profile.objects.filter(user_id= request.user.id):
@@ -77,6 +77,7 @@ def profile_update_view(request):
             profile.description = desc
             profile.gh_id = gh_id
             profile.scholar_id = scholar_id
+            profile.profile_pic = profile_pic
             profile.save()
             user.save()
             print("Saved!")
@@ -99,6 +100,7 @@ def profile_update_view(request):
                 'desc': profile.description,
                 'scholar_id': profile.scholar_id,
                 'gh_id': profile.gh_id,
+                'profile_pic' : profile.profile_pic
             }
     
     return render(request, "profile_user.html", data)
@@ -126,6 +128,7 @@ def profile_view(request, id):
         'scholar_id': profile.scholar_id,
         'gh_id': profile.gh_id,
         'authors':author,
+        'profile_pic': profile.profile_pic,
     }
 
     return render(request, 'profile.html', data)
