@@ -69,8 +69,9 @@
                                   <h3 class="heading-search item__title"><a href="{% url 'publication_view' pub.id %}">{{ pub.title }}</a></h3>
                                   <div class="item__meta">
                                      <div class="meta__row">
-                                        <span class="meta__label">{{ pub.desc }}</span>
+                                        <span class="meta__label">{{ pub.desc|truncatewords:50 }}</span>
                                      </div>
+                                     <br/>
                                      <div class="meta__row"><span class="meta__label">Authors: </span></div>
                                      <div class="meta__row">
                                         {% comment %} <div class="meta__row--mobile"><span class="meta__label meta__issns">ISSN: </span><span>1925-3621</span></div>

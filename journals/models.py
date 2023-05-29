@@ -20,8 +20,3 @@ class Publication(models.Model):
 
     def __str__(self) -> str:
         return self.title
-    
-
-class Authorship(models.Model):
-    publication=models.ForeignKey(Publication,on_delete=models.CASCADE)
-    user=models.ForeignKey(User, on_delete=models.CASCADE)

@@ -35,7 +35,7 @@
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="{{ profile_pic.url }}" alt="Admin" class="square" width="150">
+                    <img src="{% if profile_pic %} {{ profile_pic.url }} {% else %} {% static 'unknown_profile.jpg' %} {% endif %}" alt="Admin" class="square" width="150">
                     <div class="mt-3">
                       <h4>{{ name }}</h4>
                       <p class="text-secondary mb-1">{{ desc }}</p>

@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from profile.models import Profile
 from django.contrib import messages
-from journals.models import Publication,Authorship
 
 def login_page(request):
     
@@ -108,7 +107,7 @@ def profile_update_view(request):
 def profile_view(request, id):
     profile = None
     user = User.objects.get(id=id)
-    author=Authorship.objects.filter(user=user)
+
     # Only the logged in user can update his profile
     can_update = id == request.user.id
     
@@ -117,6 +116,31 @@ def profile_view(request, id):
     else:
         profile = Profile()
         print("not found")
+    
+    pub_list = []
+    
+    for pub in user.publication_set.all():
+        users=[]
+        categories = []
+
+        for c in pub.category.all():
+            categories.append(c.category)
+
+        for j in pub.authors.all():
+            users.append({
+                "name": f"{j.first_name} {j.last_name}",
+                "id": j.id
+            })
+        
+        dict = {
+            "id": pub.pk,
+            "authors":users,
+            "title":pub.title,
+            "desc": pub.description,
+            "categories": categories,
+            "image": pub.front_pic.url,
+        }
+        pub_list.append(dict)
 
     data = {
         'can_update': can_update,
@@ -127,8 +151,8 @@ def profile_view(request, id):
         'email': user.email,
         'scholar_id': profile.scholar_id,
         'gh_id': profile.gh_id,
-        'authors':author,
         'profile_pic': profile.profile_pic,
+        'publications': pub_list,
     }
 
     return render(request, 'profile.html', data)

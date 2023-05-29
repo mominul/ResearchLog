@@ -28,7 +28,7 @@
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="{{ profile_pic.url }}" alt="Admin" class="square" width="150">
+                    <img src="{% if profile_pic %} {{ profile_pic.url }} {% else %} {% static 'unknown_profile.jpg' %} {% endif %}" alt="Admin" class="square" width="150">
                     <div class="mt-3">
                       <h4>{{ name }}</h4>
                       <p class="text-secondary mb-1">{{ desc }}</p>
@@ -130,164 +130,39 @@
                 <div class="col-sm-12 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
-                     {% for author in authors %}
+                     {% for pub in publications %}
                           <ul class="rlist search-result__body search-result__publications">
-                           
                             <li class="clearfix separator search__item">
-                               <div class="item__image"><a href="/home/afpa" title="Go to Academic Forensic Pathology"><img src={% if author.publication.front_pic %}{{author.publication.front_pic.url}}{% else %}#{% endif %} title="Cover image of Academic Forensic Pathology" alt="My Image"></a></div>
+                               <div class="item__image"><a href="{{ pub.image }}"><img src="{{ pub.image }}" title="{{ pub.title }}" alt=""></a></div>
                                <div class="item__body clearfix">
                                   <div class="meta__header"></div>
-                                  <h3 class="heading-search item__title"><a href="/home/afpa">{{author.publication.title}}</a></h3>
+                                  <h3 class="heading-search item__title"><a href="{% url 'publication_view' pub.id %}">{{ pub.title }}</a></h3>
                                   <div class="item__meta">
                                      <div class="meta__row">
-                                        <span class="meta__label">Latest content: </span><span>Volume 12, </span><span>Issue 4, </span>
-                                        <sapn>December 2022</sapn>
+                                        <span class="meta__label">{{ pub.desc|truncatewords:50 }}</span>
                                      </div>
-                                     <div class="meta__row"><span class="meta__label">Content available from: </span><span>2011</span></div>
+                                     <br/>
+                                     <div class="meta__row"><span class="meta__label">Authors: </span></div>
                                      <div class="meta__row">
-                                        <div class="meta__row--mobile"><span class="meta__label meta__issns">ISSN: </span><span>1925-3621</span></div>
+                                        {% comment %} <div class="meta__row--mobile"><span class="meta__label meta__issns">ISSN: </span><span>1925-3621</span></div>
                                         <span class="meta__sep">&nbsp; | &nbsp;</span>
-                                        <div class="meta__row--mobile"><span class="meta__label meta__eissn">Online ISSN: </span><span>1925-3621</span></div>
+                                        <div class="meta__row--mobile"><span class="meta__label meta__eissn">Online ISSN: </span><span>1925-3621</span></div> {% endcomment %}
+                                        {% for author in pub.authors %}
+                                        <span class="meta__label"><a href="{% url 'profile_view' author.id %}">{{ author.name }}</a></span>
+                                        {% endfor %}
+                                     </div>
+                                     <div class="meta__row"><span class="meta__label">Categories: </span></div>
+                                     <div class="meta__row">
+                                        {% for category in pub.categories %}
+                                        <span class="meta__label"><a href="{% url 'publications' %}?category={{ category }}">{{ category }}</a></span>
+                                        {% endfor %}
                                      </div>
                                   </div>
                                </div>
                             </li>
-                            
                          </ul>
                          <hr>
-                         {% endfor %}
-                         <ul class="rlist search-result__body search-result__publications">
-                          <li class="clearfix separator search__item">
-                             <div class="item__image"><a href="/home/afpa" title="Go to Academic Forensic Pathology"><img src="https://journals.sagepub.com/na101/home/literatum/publisher/sage/journals/content/aona/2022/aona_29_2-3/aona_29_2-3/20221116-01/aona_29_2-3.cover.png" title="Cover image of Academic Forensic Pathology" alt=""></a></div>
-                             <div class="item__body clearfix">
-                                <div class="meta__header"></div>
-                                <h3 class="heading-search item__title"><a href="/home/afpa">Academic Forensic Pathology</a></h3>
-                                <div class="item__meta">
-                                   <div class="meta__row">
-                                      <span class="meta__label">Latest content: </span><span>Volume 12, </span><span>Issue 4, </span>
-                                      <sapn>December 2022</sapn>
-                                   </div>
-                                   <div class="meta__row"><span class="meta__label">Content available from: </span><span>2011</span></div>
-                                   <div class="meta__row">
-                                      <div class="meta__row--mobile"><span class="meta__label meta__issns">ISSN: </span><span>1925-3621</span></div>
-                                      <span class="meta__sep">&nbsp; | &nbsp;</span>
-                                      <div class="meta__row--mobile"><span class="meta__label meta__eissn">Online ISSN: </span><span>1925-3621</span></div>
-                                   </div>
-                                </div>
-                             </div>
-                          </li>
-                       </ul>
-                       <hr>
-                       <ul class="rlist search-result__body search-result__publications">
-                        <li class="clearfix separator search__item">
-                           <div class="item__image"><a href="/home/afpa" title="Go to Academic Forensic Pathology"><img src="https://journals.sagepub.com/na101/home/literatum/publisher/sage/journals/content/afpa/2022/afpa_12_4/afpa_12_4/20221215-01/afpa_12_4.cover.png" title="Cover image of Academic Forensic Pathology" alt=""></a></div>
-                           <div class="item__body clearfix">
-                              <div class="meta__header"></div>
-                              <h3 class="heading-search item__title"><a href="/home/afpa">Academic Forensic Pathology</a></h3>
-                              <div class="item__meta">
-                                 <div class="meta__row">
-                                    <span class="meta__label">Latest content: </span><span>Volume 12, </span><span>Issue 4, </span>
-                                    <sapn>December 2022</sapn>
-                                 </div>
-                                 <div class="meta__row"><span class="meta__label">Content available from: </span><span>2011</span></div>
-                                 <div class="meta__row">
-                                    <div class="meta__row--mobile"><span class="meta__label meta__issns">ISSN: </span><span>1925-3621</span></div>
-                                    <span class="meta__sep">&nbsp; | &nbsp;</span>
-                                    <div class="meta__row--mobile"><span class="meta__label meta__eissn">Online ISSN: </span><span>1925-3621</span></div>
-                                 </div>
-                              </div>
-                           </div>
-                        </li>
-                     </ul>
-                     <hr>
-                     <ul class="rlist search-result__body search-result__publications">
-                      <li class="clearfix separator search__item">
-                         <div class="item__image"><a href="/home/afpa" title="Go to Academic Forensic Pathology"><img src="https://journals.sagepub.com/na101/home/literatum/publisher/sage/journals/content/afpa/2022/afpa_12_4/afpa_12_4/20221215-01/afpa_12_4.cover.png" title="Cover image of Academic Forensic Pathology" alt=""></a></div>
-                         <div class="item__body clearfix">
-                            <div class="meta__header"></div>
-                            <h3 class="heading-search item__title"><a href="/home/afpa">Academic Forensic Pathology</a></h3>
-                            <div class="item__meta">
-                               <div class="meta__row">
-                                  <span class="meta__label">Latest content: </span><span>Volume 12, </span><span>Issue 4, </span>
-                                  <sapn>December 2022</sapn>
-                               </div>
-                               <div class="meta__row"><span class="meta__label">Content available from: </span><span>2011</span></div>
-                               <div class="meta__row">
-                                  <div class="meta__row--mobile"><span class="meta__label meta__issns">ISSN: </span><span>1925-3621</span></div>
-                                  <span class="meta__sep">&nbsp; | &nbsp;</span>
-                                  <div class="meta__row--mobile"><span class="meta__label meta__eissn">Online ISSN: </span><span>1925-3621</span></div>
-                               </div>
-                            </div>
-                         </div>
-                      </li>
-                   </ul>
-                   <hr>
-                   <ul class="rlist search-result__body search-result__publications">
-                    <li class="clearfix separator search__item">
-                       <div class="item__image"><a href="/home/afpa" title="Go to Academic Forensic Pathology"><img src="https://journals.sagepub.com/na101/home/literatum/publisher/sage/journals/content/afpa/2022/afpa_12_4/afpa_12_4/20221215-01/afpa_12_4.cover.png" title="Cover image of Academic Forensic Pathology" alt=""></a></div>
-                       <div class="item__body clearfix">
-                          <div class="meta__header"></div>
-                          <h3 class="heading-search item__title"><a href="/home/afpa">Academic Forensic Pathology</a></h3>
-                          <div class="item__meta">
-                             <div class="meta__row">
-                                <span class="meta__label">Latest content: </span><span>Volume 12, </span><span>Issue 4, </span>
-                                <sapn>December 2022</sapn>
-                             </div>
-                             <div class="meta__row"><span class="meta__label">Content available from: </span><span>2011</span></div>
-                             <div class="meta__row">
-                                <div class="meta__row--mobile"><span class="meta__label meta__issns">ISSN: </span><span>1925-3621</span></div>
-                                <span class="meta__sep">&nbsp; | &nbsp;</span>
-                                <div class="meta__row--mobile"><span class="meta__label meta__eissn">Online ISSN: </span><span>1925-3621</span></div>
-                             </div>
-                          </div>
-                       </div>
-                    </li>
-                 </ul>
-                 <hr>
-                 <ul class="rlist search-result__body search-result__publications">
-                  <li class="clearfix separator search__item">
-                     <div class="item__image"><a href="/home/afpa" title="Go to Academic Forensic Pathology"><img src="https://journals.sagepub.com/na101/home/literatum/publisher/sage/journals/content/afpa/2022/afpa_12_4/afpa_12_4/20221215-01/afpa_12_4.cover.png" title="Cover image of Academic Forensic Pathology" alt=""></a></div>
-                     <div class="item__body clearfix">
-                        <div class="meta__header"></div>
-                        <h3 class="heading-search item__title"><a href="/home/afpa">Academic Forensic Pathology</a></h3>
-                        <div class="item__meta">
-                           <div class="meta__row">
-                              <span class="meta__label">Latest content: </span><span>Volume 12, </span><span>Issue 4, </span>
-                              <sapn>December 2022</sapn>
-                           </div>
-                           <div class="meta__row"><span class="meta__label">Content available from: </span><span>2011</span></div>
-                           <div class="meta__row">
-                              <div class="meta__row--mobile"><span class="meta__label meta__issns">ISSN: </span><span>1925-3621</span></div>
-                              <span class="meta__sep">&nbsp; | &nbsp;</span>
-                              <div class="meta__row--mobile"><span class="meta__label meta__eissn">Online ISSN: </span><span>1925-3621</span></div>
-                           </div>
-                        </div>
-                     </div>
-                  </li>
-               </ul>
-               <hr>
-               <ul class="rlist search-result__body search-result__publications">
-                <li class="clearfix separator search__item">
-                   <div class="item__image"><a href="/home/afpa" title="Go to Academic Forensic Pathology"><img src="https://journals.sagepub.com/na101/home/literatum/publisher/sage/journals/content/afpa/2022/afpa_12_4/afpa_12_4/20221215-01/afpa_12_4.cover.png" title="Cover image of Academic Forensic Pathology" alt=""></a></div>
-                   <div class="item__body clearfix">
-                      <div class="meta__header"></div>
-                      <h3 class="heading-search item__title"><a href="/home/afpa">Academic Forensic Pathology</a></h3>
-                      <div class="item__meta">
-                         <div class="meta__row">
-                            <span class="meta__label">Latest content: </span><span>Volume 12, </span><span>Issue 4, </span>
-                            <sapn>December 2022</sapn>
-                         </div>
-                         <div class="meta__row"><span class="meta__label">Content available from: </span><span>2011</span></div>
-                         <div class="meta__row">
-                            <div class="meta__row--mobile"><span class="meta__label meta__issns">ISSN: </span><span>1925-3621</span></div>
-                            <span class="meta__sep">&nbsp; | &nbsp;</span>
-                            <div class="meta__row--mobile"><span class="meta__label meta__eissn">Online ISSN: </span><span>1925-3621</span></div>
-                         </div>
-                      </div>
-                   </div>
-                </li>
-             </ul>
-             <hr>
+                        {% endfor %}
                     </div>
                   </div>
                 </div>
