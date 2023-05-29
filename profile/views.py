@@ -62,13 +62,19 @@ def profile_update_view(request):
             desc = request.POST['desc']
             scholar_id = request.POST['scholar_id']
             gh_id = request.POST['gh_id']
-            profile_pic = request.FILES['profile_pic']
             profile = None
 
             if Profile.objects.filter(user_id= request.user.id):
                 profile = Profile.objects.get(user_id= request.user.id)
             else:
                 profile = Profile(user_id = request.user.id)
+
+            # Profile pic
+            try:
+                profile_pic = request.FILES['profile_pic']
+                profile.profile_pic = profile_pic
+            except:
+                pass
             
             user = request.user
             user.first_name = fname
@@ -76,7 +82,6 @@ def profile_update_view(request):
             profile.description = desc
             profile.gh_id = gh_id
             profile.scholar_id = scholar_id
-            profile.profile_pic = profile_pic
             profile.save()
             user.save()
             print("Saved!")
