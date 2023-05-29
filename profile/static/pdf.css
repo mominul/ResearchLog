@@ -1,0 +1,18 @@
+textarea{
+    margin: initial;
+    height: fit-content;
+    font-size: xx-large;
+    color: rgb(8, 8, 56);
+    font-family: 'Courier New', Courier, monospace;
+    line-height: normal;
+    transform: translate(-0%,-0%)
+}
+h1{
+    color: rgb(12, 12, 19);
+    font-size: xx-large;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+
+
