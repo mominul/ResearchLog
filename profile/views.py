@@ -1,8 +1,13 @@
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from profile.models import Profile
 from django.contrib import messages
+from .tokens import generate_tokens
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from ResearchLog import settings
 
 def login_page(request):
     
@@ -39,6 +44,10 @@ def signup_view(request):
             username = email.split('@')[0]
             password1 = request.POST['psw']
             password2 = request.POST['psw-repeat']
+
+            if not email.endswith("@uap-bd.edu"):
+                messages.error(request, "Only valid uap-bd.edu accounts are accepted!")
+                return redirect('/signup')
             
             if User.objects.filter(email=email):
                 messages.error(request, "Emali already registered!")
@@ -49,9 +58,51 @@ def signup_view(request):
                 return redirect('/signup')
 
             newuser = User.objects.create_user(username, email, password1, first_name=fname, last_name=lname)
+            newuser.is_active = False
             newuser.save()
+
+            messages.error(request, "Your Account has been successfully created. We have a confirmation email, please confirm your email in order to activate your account.")
+
+            current_site = get_current_site(request)
+            email_subject = "Confirm your email"
+            email_body = render_to_string('email_confirmation.html', {
+                'name': f'{fname} {lname}',
+                'domain': current_site.domain,
+                'uid': newuser.pk, 
+                'token': generate_tokens.make_token(newuser)
+            })
+
+            email =  EmailMessage(
+                email_subject,
+                email_body,
+                settings.EMAIL_HOST_USER,
+                [newuser.email],
+                
+            )
+            email.fail_silently=True
+            email.send()
+
             return redirect('/')
     return render(request, "signup.html")
+
+def activate(request, uid, token):
+
+    try:
+        newuser = User.objects.get(pk=uid)
+       
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        newuser = None
+        
+    if newuser is not None and generate_tokens.check_token(newuser, token):
+        newuser.is_active=True 
+        newuser.save()
+        login(request, newuser)
+        return  redirect('/')
+    else:
+        return render(request,'activation_failed.html')
+
+def reset_password(request):
+    return render(request, 'reset_password.html')
 
 def profile_update_view(request):
     data = {}
