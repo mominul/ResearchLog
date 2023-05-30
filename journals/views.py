@@ -65,31 +65,6 @@ def publications_view(request):
     return render(request, "list.html",data)
 
 @login_required
-@csrf_exempt
-def upload_journal(request):
-    if request.method == 'POST':
-            title = request.POST['title']
-            # description = request.POST['description']
-            pdf = request.FILES['pdf']
-            pdf_doc = fitz.open(stream=pdf.read(), filetype='pdf')
-
-            # Get the first page of the PDF
-            first_page = pdf_doc.load_page(0)
-
-            # Convert the first page to an image
-            image_bytes = first_page.get_pixmap().tobytes()
-            # Save the image data to the database
-            new_joural=Publication(title=title,pdf=pdf)
-            new_joural.front_pic.save(f'{title}.png', ContentFile(image_bytes))
-            new_joural.save()
-            new_author=Authorship(publication=new_joural)
-            new_author.user=request.user            
-            new_author.save()
-
-        
-    return redirect(reverse('profile_update'))
-
-@login_required
 def upload_publication(request):
     if request.POST:
         print(request.POST)
