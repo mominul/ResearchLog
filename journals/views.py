@@ -151,3 +151,23 @@ def view_publication(request, id):
         "image": pub.front_pic.url,
     }
     return render(request, 'pdfview.html', data)
+
+def approve_publications(request):
+    list = []
+    for pub in Publication.objects.filter(is_approved=False):
+        list.append({
+            'id': pub.pk,
+            'title': pub.title,
+            'image': pub.front_pic.url,
+        })
+    
+    data = {
+        'publications': list,
+    }
+    return render(request, 'approve.html', data)
+
+def approve_publication(request, id):
+    return redirect('/publications/approve/')
+
+def delete_publication(request, id):
+    return redirect('/publications/approve/')

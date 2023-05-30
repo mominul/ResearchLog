@@ -38,6 +38,11 @@
         <ul class="links">
           <li><a href="{% url 'home' %}">Home</a></li>
           <li><a href="{% url 'publications' %}">Publications</a></li>
+          {% if request.user.is_staff %}
+          <li>
+            <a href="{% url 'publications_approve' %}">Approval</a>
+          </li>
+          {% endif %}
           {% if not request.user.is_authenticated %}
           <li><a href="{% url 'login' %}">Login</a></li>
           <li>
@@ -50,9 +55,6 @@
             <a href="{% url 'logout' %}">Logout</a>
           </li>
           {% endif %}
-          {% comment %} <li>
-            <a >About</a>
-          </li> {% endcomment %}
           {% block navbar %}{% endblock  %}
         </ul>
       </div>
