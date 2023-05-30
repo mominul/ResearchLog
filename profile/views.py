@@ -177,6 +177,10 @@ def profile_update_view(request):
             scholar_id = request.POST['scholar_id']
             gh_id = request.POST['gh_id']
             profile = None
+            user_designation = request.POST['user_designation']
+            user_phone = request.POST['user_phone']
+            user_website = request.POST['user_website']
+            linkedIn = request.POST['linkedIn']
 
             if Profile.objects.filter(user_id= request.user.id):
                 profile = Profile.objects.get(user_id= request.user.id)
@@ -196,6 +200,10 @@ def profile_update_view(request):
             profile.description = desc
             profile.gh_id = gh_id
             profile.scholar_id = scholar_id
+            profile.user_designation = user_designation
+            profile.user_phone = user_phone
+            profile.user_website = user_website
+            profile.linkedIn = linkedIn
             profile.save()
             user.save()
             print("Saved!")
@@ -218,7 +226,11 @@ def profile_update_view(request):
                 'desc': profile.description,
                 'scholar_id': profile.scholar_id,
                 'gh_id': profile.gh_id,
-                'profile_pic' : profile.profile_pic
+                'profile_pic' : profile.profile_pic,
+                'user_designation' : profile.user_designation,
+                'user_phone' :profile.user_phone,
+                'user_website' : profile.user_website,
+                'linkedIn' : profile.linkedIn
             }
     
     return render(request, "profile_user.html", data)
@@ -272,6 +284,10 @@ def profile_view(request, id):
         'gh_id': profile.gh_id,
         'profile_pic': profile.profile_pic,
         'publications': pub_list,
+        'user_designation' : profile.user_designation,
+        'user_phone' : profile.user_phone,
+        'user_website' : profile.user_website,
+        'linkedIn' : profile.linkedIn
     }
 
     return render(request, 'profile.html', data)
