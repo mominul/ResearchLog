@@ -18,7 +18,7 @@ def publications_view(request):
     pub=[]
     pub_list=[] 
 
-    for i in Publication.objects.all():
+    for i in Publication.objects.filter(is_approved=True):
         users=[]
         categories = []
 
@@ -152,22 +152,39 @@ def view_publication(request, id):
     }
     return render(request, 'pdfview.html', data)
 
+@login_required
 def approve_publications(request):
-    list = []
-    for pub in Publication.objects.filter(is_approved=False):
-        list.append({
-            'id': pub.pk,
-            'title': pub.title,
-            'image': pub.front_pic.url,
-        })
+    if request.user.is_staff:
+        list = []
+        for pub in Publication.objects.filter(is_approved=False):
+            list.append({
+                'id': pub.pk,
+                'title': pub.title,
+                'image': pub.front_pic.url,
+            })
+        
+        data = {
+            'publications': list,
+        }
+        return render(request, 'approve.html', data)
     
-    data = {
-        'publications': list,
-    }
-    return render(request, 'approve.html', data)
+    return redirect('/')
 
+@login_required
 def approve_publication(request, id):
-    return redirect('/publications/approve/')
+    if request.user.is_staff:
+        pub = Publication.objects.get(id=id)
+        pub.is_approved = True
+        pub.save()
+        return redirect('/publications/approve/')
+    
+    return redirect('/')
 
+@login_required
 def delete_publication(request, id):
-    return redirect('/publications/approve/')
+    if request.user.is_staff:
+        pub = Publication.objects.get(id=id)
+        pub.delete()
+        return redirect('/publications/approve/')
+    
+    return redirect('/')
