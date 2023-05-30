@@ -182,3 +182,29 @@ nav .content .links{
   transform: translate(-50%, -50%);
 }
 
+.error {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+}
+
+.success {
+  padding: 20px;
+  background-color: green;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}

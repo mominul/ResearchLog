@@ -15,15 +15,15 @@
         {% block title %}
         {% endblock %}
   </title>
-  {% block style %}
-  {% endblock %}
   <link rel='stylesheet' href="{% static 'style1.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  {% block style %}
+  {% endblock %}
 </head>
 <body>
   {% for message in messages %}
-  <div id="msg" class="alert">
+  <div id="msg" {% if message.tags %} class="{{ message.tags }}"{% endif %}>
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
     <strong></strong> {{ message }}
   </div>
@@ -71,6 +71,6 @@
     $('#msg').remove();
     }
   }, 2000)
-</script> 
+</script>
 </body>
 </html>
