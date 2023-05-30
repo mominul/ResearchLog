@@ -1,0 +1,11 @@
+{% autoescape off %}
+
+Hello {{ name }}
+
+Welcome to ResearchLog! In order to complete the sign-up process and make use of your account, please click on the confirmation link.
+
+
+Confirmation Link: http://{{ domain }}{% url 'activate' uid=uid token=token %}
+
+
+{% endautoescape %}

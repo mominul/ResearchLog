@@ -136,9 +136,9 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MESSAGE_TAGS={
-    messages.ERROR:'danger'
-}
+# MESSAGE_TAGS={
+#     messages.ERROR:'danger'
+# }
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
 

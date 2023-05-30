@@ -7,6 +7,11 @@ class Profile(models.Model):
     description = models.TextField(null=True)
     scholar_id = models.CharField(max_length=255, null=True)
     gh_id = models.CharField(max_length=255, null=True)
+    user_designation = models.CharField(max_length=255, null=True)
+    user_phone = models.CharField(max_length=255, null=True)
+    user_website = models.CharField(max_length=255, null=True)
+    linkedIn = models.CharField(max_length=255, null=True)
+
 
     def __str__(self) -> str:
         return self.user.first_name
