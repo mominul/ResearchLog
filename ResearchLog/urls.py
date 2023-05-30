@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from home.views import home_view
 import profile.views as profile_view
-from journals.views import publications_view,upload_journal
+from journals.views import publications_view
 from django.conf import settings
 from django.conf.urls.static import static
 from journals.views import upload_publication, view_publication
@@ -34,7 +34,6 @@ urlpatterns = [
     path('reset-password', profile_view.reset_password,name='reset_password'),
     path('profile/<int:id>',profile_view.profile_view, name='profile_view'),
     path('profile_update/',profile_view.profile_update_view, name='profile_update'),
-    path('upload-journal/',upload_journal,name='upload_journal'),
     path('publications/',publications_view, name='publications'),
     path('publications/upload',upload_publication, name='upload_pub'),
     path('publications/view/<int:id>', view_publication, name='publication_view')
