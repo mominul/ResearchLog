@@ -2,7 +2,6 @@
 {% load static %}
 {% block style %}
 <link rel='stylesheet' href="{% static 'login.css' %}">
-<link rel='stylesheet' href="{% static 'style1.css' %}">
 {% endblock %}
 
 {% block title %}
@@ -34,7 +33,7 @@
       <div class="signup_link">
         New to ResearchLog? <a href="{% url 'signup' %}">Signup</a>
         <br/>
-        Forgot your password? <a href="{% url 'login' %}">Reset</a>
+        Forgot your password? <a href="{% url 'forgot_password' %}">Reset</a>
       </div>
     </form>
   </div>
