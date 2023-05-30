@@ -1,8 +1,13 @@
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from profile.models import Profile
 from django.contrib import messages
+from .tokens import generate_tokens
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from ResearchLog import settings
 
 def login_page(request):
     
@@ -39,6 +44,10 @@ def signup_view(request):
             username = email.split('@')[0]
             password1 = request.POST['psw']
             password2 = request.POST['psw-repeat']
+
+            if not email.endswith("@uap-bd.edu"):
+                messages.error(request, "Only valid uap-bd.edu accounts are accepted!")
+                return redirect('/signup')
             
             if User.objects.filter(email=email):
                 messages.error(request, "Emali already registered!")
@@ -49,9 +58,114 @@ def signup_view(request):
                 return redirect('/signup')
 
             newuser = User.objects.create_user(username, email, password1, first_name=fname, last_name=lname)
+            newuser.is_active = False
             newuser.save()
+
+            messages.success(request, "Your Account has been successfully created. We have a confirmation email, please confirm your email in order to activate your account.")
+
+            current_site = get_current_site(request)
+            email_subject = "Confirm your email"
+            email_body = render_to_string('email_confirmation.html', {
+                'name': f'{fname} {lname}',
+                'domain': current_site.domain,
+                'uid': newuser.pk, 
+                'token': generate_tokens.make_token(newuser)
+            })
+
+            email =  EmailMessage(
+                email_subject,
+                email_body,
+                settings.EMAIL_HOST_USER,
+                [newuser.email],
+                
+            )
+            email.fail_silently=True
+            email.send()
+
             return redirect('/')
     return render(request, "signup.html")
+
+def activate(request, uid, token):
+
+    try:
+        newuser = User.objects.get(pk=uid)
+       
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        newuser = None
+        
+    if newuser is not None and generate_tokens.check_token(newuser, token):
+        newuser.is_active=True 
+        newuser.save()
+        messages.success(request,'Account activated successfully!')
+        login(request, newuser)
+        return  redirect('/')
+    else:
+        return render(request,'activation_failed.html')
+
+def forgot_password(request):
+    if not request.user.is_authenticated:
+        if request.method=='POST':
+            email=request.POST['email']
+            forgot_user=User.objects.filter(email=email).exists()
+            if forgot_user:
+
+                forgot_user_object=User.objects.get(email=email)
+                current_site = get_current_site(request)
+                email_subject = "Forgot Password"
+                email_body = render_to_string('email_forgot_password.html', {
+                    'name': forgot_user_object.username,
+                    'domain': current_site.domain,
+                    'uid': forgot_user_object.pk, 
+                    'token': generate_tokens.make_token(forgot_user_object)
+                }
+                )
+                email =  EmailMessage(
+                    email_subject,
+                    email_body,
+                    settings.EMAIL_HOST_USER,
+                    [forgot_user_object.email],
+                    
+                )
+                email.fail_silently=True
+                email.send()
+            messages.success(request,'Email sent successfully')
+            return redirect('/login')
+        return render(request,'forgot_password.html')
+    else:
+        return redirect('/')
+
+def forgot_password_active_url(request,uid,token):
+    try:
+        resetuser = User.objects.get(pk=uid)
+       
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        resetuser = None
+    
+    if resetuser is not None and generate_tokens.check_token(resetuser, token):
+       return  render(request, 'reset_password.html',{'uid': uid})
+    else:
+        return render(request,'activation_failed.html')
+    
+def reset_password(request):
+    if request.method=='POST':
+        uid=request.POST['uid']
+        password1=request.POST['psw']
+        password2=request.POST['psw-repeat']
+
+        try:
+            resetuser = User.objects.get(pk=uid)
+       
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            resetuser = None
+        if resetuser is not None:
+
+            if password1 != password2:
+                    messages.error(request,"Password didn't match!")
+                    return  render(request, 'reset_password.html',{'uid': uid})
+            resetuser.set_password(password1)
+            resetuser.save()
+            messages.success(request,'Your password has been successfully updated')
+    return redirect('/login')
 
 def profile_update_view(request):
     data = {}
@@ -62,13 +176,19 @@ def profile_update_view(request):
             desc = request.POST['desc']
             scholar_id = request.POST['scholar_id']
             gh_id = request.POST['gh_id']
-            profile_pic = request.FILES['profile_pic']
             profile = None
 
             if Profile.objects.filter(user_id= request.user.id):
                 profile = Profile.objects.get(user_id= request.user.id)
             else:
                 profile = Profile(user_id = request.user.id)
+
+            # Profile pic
+            try:
+                profile_pic = request.FILES['profile_pic']
+                profile.profile_pic = profile_pic
+            except:
+                pass
             
             user = request.user
             user.first_name = fname
@@ -76,7 +196,6 @@ def profile_update_view(request):
             profile.description = desc
             profile.gh_id = gh_id
             profile.scholar_id = scholar_id
-            profile.profile_pic = profile_pic
             profile.save()
             user.save()
             print("Saved!")
