@@ -4,6 +4,13 @@
 {% block style %}
 <link rel="stylesheet" href="{% static 'psstyle.css' %}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+  .title {
+    padding: 10px 0px 0px 30px;
+    font-weight: bold;
+  }
+
+</style>
 {% endblock %}
 
 
@@ -53,11 +60,20 @@
                         <h4>Hi {{ request.user.first_name }}</h4>
                       </div>
                       <div class="row">
-                        <div class="col">
-                          hello
+                        <div class="col-10">
+                          <div class="row">
+                            <span class="title">Published Papers: </span>
+                            <span style="padding-top:10px; padding-left: 7px">{{pub_count}}</span>
+                          </div>
+                          <div class="row">
+                            <span class="title">Awaiting for Approval Papers: </span>
+                            <span style="padding-top:10px; padding-left: 7px">{{awaiting}}</span>
+                          </div>
                         </div>
                         <div class="col">
-                          hi
+                          <div style="padding-right:12px;">
+                          <a href="{% url 'upload_pub' %}"><button class="btn btn-primary">Publish a paper</button></a>
+                          </div>
                         </div>
                       </div>
                         
