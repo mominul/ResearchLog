@@ -67,7 +67,6 @@ def publications_view(request):
 @login_required
 def upload_publication(request):
     if request.POST:
-        print(request.POST)
         title = request.POST["title"]
         desc = request.POST["desc"]
 
@@ -117,7 +116,8 @@ def upload_publication(request):
             return redirect('/publications/upload')
         
         pub.save()
-        
+        messages.success(request, "Paper added to the approval queue succesfully!")
+        return redirect('/')
 
     categories=[]
     for i in Category.objects.all():
@@ -127,6 +127,83 @@ def upload_publication(request):
         "categories": categories,
     }
     return render(request, 'upload.html', data)
+
+@login_required
+def update_publication(request, id):
+    pub = Publication.objects.get(id=id)
+    if request.POST:
+        print(request.POST)
+        title = request.POST["title"]
+        pub.title = request.POST["title"]
+        pub.description = request.POST["desc"]
+
+        # Co-authors
+        if request.POST["authors"] != "":
+            authors = str(request.POST["authors"])
+            if authors.endswith(','):
+                authors = authors[:-1]
+            pub.authors.clear()
+            for author in authors.strip().split(','):
+                try:
+                    author = User.objects.get(username=author)
+                    pub.authors.add(author)
+                except:
+                    print(list(request.POST["categories"]))
+                    messages.error(request, f"No registered user '{author}' found!")
+                    return redirect(f'/publications/update/{id}')
+
+        # Categories
+        try:
+            for category in request.POST["categories"]:
+                # print(category)
+                category = Category.objects.get(id=category)
+                pub.category.add(category)
+        except:
+            messages.error(request, "Please select a category!")
+            return redirect(f'/publications/update/{id}')
+
+        # Pdf file processing
+        try:
+            pdf = request.FILES['pdf']
+            pub.pdf = pdf
+
+            pdf_doc = fitz.open(stream=pdf.read(), filetype='pdf')
+
+            # Get the first page of the PDF
+            first_page = pdf_doc.load_page(0)
+
+            # Convert the first page to an image
+            image_bytes = first_page.get_pixmap().tobytes()
+            # Save the image data to the database
+            pub.front_pic.save(f'{title}.png', ContentFile(image_bytes))
+        except:
+            pass
+        
+        pub.save()
+        messages.success(request, "Paper updated succesfully!")
+        return redirect(f'/publications/view/{id}')
+
+    categories =[]
+    for cat in Category.objects.all():
+        categories.append({
+            "id": cat.id,
+            "category": cat.category,
+            "selected": cat in pub.category.all(),
+        })
+    
+    authors = ""
+
+    for author in pub.authors.all():
+        authors += f"{author.username},"
+
+    data = {
+        "title": pub.title,
+        "desc": pub.description,
+        "authors": authors,
+        "categories": categories,
+        "file": pub.pdf.url,
+    }
+    return render(request, 'paper_update.html', data)
 
 def view_publication(request, id):
     pub = Publication.objects.get(id=id)
@@ -141,14 +218,18 @@ def view_publication(request, id):
     categories = []
     for category in pub.category.all():
         categories.append(category.category)
+
+    show_button = request.user in pub.authors.all()
     
     data = {
+        "id": id,
         "title": pub.title,
         "desc": pub.description,
         "authors": authors,
         "categories": categories,
         "pdf": pub.pdf.url,
         "image": pub.front_pic.url,
+        "show_button": show_button,
     }
     return render(request, 'pdfview.html', data)
 

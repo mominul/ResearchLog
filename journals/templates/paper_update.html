@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="{% static 'upload.css' %}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 {% endblock %}
-{% block title %}Paper Submission{% endblock title %}
+{% block title %}Update Paper{% endblock title %}
 {% block content %}
 <div class="container">
     <div class="main-body"> 
@@ -24,7 +24,7 @@
                       <h6 class="mb-6">Title</h6>
                     </div>
                     <div class="col-sm-8 text-secondary">
-                     <input type="text" name="title">
+                     <input type="text" name="title" value="{{title}}">
                     </div>
                   </div>
                   <hr>
@@ -33,7 +33,7 @@
                        <h6 class="mb-5">Description</h6>
                      </div>
                      <div class="col-sm-8 text-secondary">
-                      <textarea name="desc" rows="5" cols="24"></textarea>
+                      <textarea name="desc" rows="5" cols="24">{{desc}}</textarea>
                      </div>
                    </div>
                   <hr>
@@ -44,7 +44,7 @@
                       <h7>Use comma to seperate</h7>
                     </div>
                     <div class="col-sm-4 text-secondary">
-                     <input type="text" name="authors">
+                     <input type="text" name="authors" value="{{authors}}">
                     </div>
                   </div>
                   <hr>
@@ -55,7 +55,7 @@
                     <div class="col-sm-5 text-secondary">
                      <select id="categories" name="categories" size="4" multiple>
                       {% for cat in categories %}
-                      <option value="{{ cat.id }}">{{ cat.category }}</option>
+                      <option value="{{ cat.id }}" {% if cat.selected %}selected{% endif %}>{{ cat.category }}</option>
                       {% endfor %}
                     </select>
                     </div>
@@ -66,7 +66,7 @@
                       <h6 class="mb-0">PDF file</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                     <input style="border:0px"  type="file" name="pdf">
+                     <input style="border:0px"  type="file" name="pdf" value="{{file}}">
                     </div>
                   </div>
                   <hr>

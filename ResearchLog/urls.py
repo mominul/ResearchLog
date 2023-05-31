@@ -20,7 +20,11 @@ import profile.views as profile_view
 from journals.views import publications_view
 from django.conf import settings
 from django.conf.urls.static import static
+<<<<<<< HEAD
 from journals.views import upload_publication, view_publication, approve_publications, approve_publication, delete_publication, update_publication
+=======
+from journals.views import upload_publication, view_publication, update_publication, approve_publications, approve_publication, delete_publication
+>>>>>>> upstream/main
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,6 +40,7 @@ urlpatterns = [
     path('profile_update/',profile_view.profile_update_view, name='profile_update'),
     path('publications/',publications_view, name='publications'),
     path('publications/upload',upload_publication, name='upload_pub'),
+    path('publications/update/<int:id>', update_publication, name='publication_update'),
     path('publications/view/<int:id>', view_publication, name='publication_view'),
     path('publications/approve/', approve_publications, name='publications_approve'),
     path('publications/approve/<int:id>', approve_publication, name='approve_publication'),
