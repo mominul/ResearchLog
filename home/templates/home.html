@@ -9,7 +9,13 @@
     padding: 10px 0px 0px 30px;
     font-weight: bold;
   }
-
+  .item__image {
+    display: block;
+    max-width:100px;
+    max-height:=100px;
+    width: auto;
+    height: auto;
+  }
 </style>
 {% endblock %}
 
@@ -23,7 +29,7 @@
  
                   <h3>Browse journals by discipline:</h3>
                    
-                   <div class="card-group">
+                   <div class="card-group" style="padding-top:10px;">
                     {% for cat in category %}
                       <div class="card text-dark bg-light">
                    
@@ -53,6 +59,7 @@
                   </div>
                    
                   </div>
+                  {% if request.user.is_authenticated and not request.user.is_staff %}
                   <br/>
                   <div class="card">
                     <div class="card-body">
@@ -76,21 +83,56 @@
                           </div>
                         </div>
                       </div>
-                        
-                          
-                        
-                         
-                      
-                         
-                      
-                       
-                      </div>    
+                    </div>    
                       
                     </div>
-                 
-                </div>   
+                    {% endif %}
+                    <br/>
+                    <div class="card">
+                      <div class="card-body">
+
+                        <h3>Top Authors:</h3>
+                   <div class="card-group" style="padding-top:10px;">
+                    {% for user in users %}
+                      <div class="card text-dark bg-light">
+
+                        <div class="d-flex flex-column align-items-center text-center" style="padding-top:20px;">
+                          <img class="item__image" src="{{user.pic}}">
+                        </div>
+
+                          <a href="{% url 'profile_view' user.id %}">
+                            <div class="card-body text-center">
+                       
+                              <h5 class="card-title">{{ user.name }}</h5>
+                       
+                              {% comment %} <p class="card-text text-left"> write something here. </p> {% endcomment %}
+                       
+                            </div>
+                          </a>
+                      
+                      
+                  
+                        {% comment %} <div class="card-footer bg-success text-right text-danger">
+                   
+                        <a href="#" class="btn btn-outline-light btn-sm">More info</a>
+                   
+                        </div> {% endcomment %}
+                   
+                    </div>
+                    {% endfor %}
+                  
+                   
+                  </div> 
+                       
+                      {% comment %} end   {% endcomment %}
+                      </div>
+                  </div>
+        
+        
     
-              
+    
+    
+    </div>  
 </div>
 {% endblock content %}
 
