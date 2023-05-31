@@ -48,7 +48,15 @@
                     {% endfor %}
                   </div>
                 </div>
-                  
+                {% if show_button %}
+                <div class="row">
+                  <div class="col-9">
+                  </div>
+                  <div class="col">
+                  <a href="{% url 'publication_update' id %}"><button class="btn btn-primary">Update</button></a>
+                  </div>
+                </div>
+                {% endif %}
                   
                 </div>
               </div>
