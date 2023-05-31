@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block navbar %}
+
+{% endblock  %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'upload.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="main-body"> 
+          <div class="row gutters-sm">
+            <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-md-12">
+              <div class="card mb-5">
+                <div class="card-body" Style="margin:5px 19px 5px 5px">
+                  {% comment %} Title Field {% endcomment %}
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <h6 class="mb-4">Title</h6>
+                    </div>
+                    <div class="col-sm-8 text-secondary">
+                     <input type="text" name="title" value="{{ title }}">
+                    </div>
+                  </div>
+                  {% comment %} Description Field {% endcomment %}
+                  <hr>
+                  <div class="row">
+                     <div class="col-sm-4">
+                       <h6 class="mb-5">Description</h6>....  
+                     </div>
+                     <div class="col-sm-8 text-secondary">
+                      <input type="text" name="desc" value ="{{ desc}}">
+                      <textarea name="desc" rows="5" cols="18"></textarea>
+                     </div>
+                   </div>
+                   {% comment %} Co-Authors {% endcomment %}
+                  <hr>
+                  <div class="row">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   <div class="col-sm-4">
+                      <h6 class="mb-4">Co-Authors</h6>
+                    </div>
+                    <div class="col-sm-8 text-secondary">
+                     <input type="text" name="authors" value ="{{ authors}}">
+                    </div>
+                  </div>
+                  {% comment %} Categories Selection {% endcomment %}
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <h6 class="mb-5">Categories</h6>
+                    </div>
+                    <div class="col-sm-5 text-secondary">
+                     <select id="categories" name="categories" size="4" multiple>
+                      {% for cat in categories %}
+                      <option value="{{ cat.id }}">{{ cat.category }}</option>
+                      {% endfor %}
+                    </select>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">PDF file</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <input style="border:0px" type="file" name="pdf" value="{{ pdf }}">
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12 align-items-center text-center">
+                      {% comment %} <a class="btn btn-info " target="__blank" href="#">Update</a> {% endcomment %}
+                      <input class="btn btn-info " type="submit" value="Submit">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+            </div>
+          </div>
+
+        </div>
+    </div>
+    {% endblock content %}
