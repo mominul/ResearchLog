@@ -67,7 +67,6 @@ def publications_view(request):
 @login_required
 def upload_publication(request):
     if request.POST:
-        print(request.POST)
         title = request.POST["title"]
         desc = request.POST["desc"]
 
@@ -117,7 +116,8 @@ def upload_publication(request):
             return redirect('/publications/upload')
         
         pub.save()
-        
+        messages.success(request, "Paper added to the approval queue succesfully!")
+        return redirect('/')
 
     categories=[]
     for i in Category.objects.all():
