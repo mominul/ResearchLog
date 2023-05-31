@@ -48,6 +48,15 @@
                     {% endfor %}
                   </div>
                 </div>
+
+                {% comment %} {% if can_update %} {% endcomment %}
+                <hr>
+                <div class="row">
+                  <div class="col-sm-12 align-items-center text-center">
+                    <a class="btn btn-info " target="__blank" href="{% url 'update_publication' %}">Update Publication</a>
+                  </div>
+                </div>
+                {% comment %} {% endif %} {% endcomment %}
                   
                   
                 </div>
