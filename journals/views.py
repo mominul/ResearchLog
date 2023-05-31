@@ -153,6 +153,48 @@ def view_publication(request, id):
     return render(request, 'pdfview.html', data)
 
 @login_required
+def update_publication(request):
+    # data = {}
+    # if request.user.is_authenticated:      
+    #     if request.method == 'POST':
+    #         title = request.POST["title"]
+    #         desc = request.POST["desc"]
+    #         category = request.POST['category']
+    #         authors = request.POST['authors']
+    #         publication = None
+            
+
+    #         if Publication.authors.user.objects.filter(user_id= request.user.id):
+    #             publication = Publication.authors.user.objects.get(user_id= request.user.id)
+    #         else:
+    #             publication = Publication.authors.user(user_id = request.user.id)
+
+    #         # Profile pic
+    #         try:
+    #             front_pic = request.FILES['front_pic']
+    #             publication.front_pic = front_pic
+    #         except:
+    #             pass
+            
+    #         user = request.user
+    #         publication.title = title
+    #         publication.description = desc
+    #         publication.save()
+    #         print("Saved!")
+    #         return redirect(f'/pdfview/{user.id}')
+    #     else:
+    #         publication = None
+    #         publication = Publication(title=title, description=desc)
+    #         print(user)
+
+    #         data = {
+    #             'title': publication.title,
+    #             'desc': publication.desc,
+    #         }
+    # return render(request, 'update_journal.html',data)
+    return render(request, 'update_journal.html')
+
+@login_required
 def approve_publications(request):
     if request.user.is_staff:
         list = []
