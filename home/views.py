@@ -2,7 +2,6 @@ from django.shortcuts import render, HttpResponse
 from journals.models import Category
 from django.contrib.auth.models import User
 from profile.models import Profile
-from django.contrib.staticfiles import finders
 from django.templatetags.static import static
 
 def home_view(request):
@@ -21,7 +20,7 @@ def home_view(request):
     users = []
     
     # Top 5 authors
-    top_users = list(User.objects.filter(is_staff=False))[:6]
+    top_users = list(User.objects.filter(is_staff=False, is_active=True))[:6]
 
     def sort(i):
         l = len(i.publication_set.filter(is_approved=True))
