@@ -16,6 +16,8 @@
         {% endblock %}
   </title>
   <link rel='stylesheet' href="{% static 'style1.css' %}">
+  <link rel='stylesheet' href="{% static 'footer.css' %}">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
   {% block style %}
@@ -34,7 +36,8 @@
       <input type="checkbox" id="show-menu">
       <label for="show-menu" class="menu-icon"><i class="fas fa-bars"></i></label>
       <div class="content">
-      <div class="logo"><a href="{% url 'home' %}">ResearchLog</a></div>
+          <img class="img-logo" src="{% static 'logo.png' %}" alt="UAP">
+
         <ul class="links">
           <li><a href="{% url 'home' %}">Home</a></li>
           <li><a href="{% url 'publications' %}">Publications</a></li>
@@ -55,18 +58,52 @@
             <a href="{% url 'logout' %}">Logout</a>
           </li>
           {% endif %}
+          <div class="logo"style="text-align:right"><a href="{% url 'home' %}">ResearchLog</a></div>
+
           {% block navbar %}{% endblock  %}
         </ul>
       </div>
-      <label for="show-search" class="search-icon"><i class="fas fa-search"></i></label>
+      {% comment %} <label for="show-search" class="search-icon"><i class="fas fa-search"></i></label>
       <form action="#" class="search-box">
         <input type="text" placeholder="Search here...." required>
-        <button type="submit" class="go-icon"><i class="fas fa-long-arrow-alt-right"></i></button>
+        <button type="submit" class="go-icon"><i class="fas fa-long-arrow-alt-right"></i></button> {% endcomment %}
       </form>
     </nav>
   </div>
 
  {% block content %} {% endblock %}
+
+<footer>
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-lg-4 col-md-4">
+        <div  >
+          <img src="{% static 'logo.png' %} " height="120px" alt="UAP" />
+          <p class="text-left text-lg-start text-white">74/A, Green Road, Farmgate
+            Dhaka-1205, Bangladesh
+            PABX:+8802-58157091-4,6
+            FAX:+8802-58157097</p>
+
+        </div>
+      
+      </div>
+      </div>
+      
+      
+    </div>
+ 
+  <div class="copyright text-center">
+    <div class="credits">
+      Developed by <a href="http://mominul.github.io" target="_blank">Mominul </a>, <a href="https://mhyemon95.github.io/" target="_blank">Yemon
+  </a>,
+       <a href="https://capt-farvez.github.io/" target="_blank">Farvez</a> &amp; <a href="#" target="_blank">Ashik
+  </a>
+  </div>
+    Copyright &copy; 2023 <span>ResearchLog</span>
+  </div>
+</footer>
+
  <script>
   setTimeout(function(){
     if ($('#msg').length > 0) {
