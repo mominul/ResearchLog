@@ -31,9 +31,16 @@ nav .content .links{
   display: flex;
 }
 .content .logo a{
-  color:#fff;
-  font-size: 32px;
+  color:floralwhite;
+  font-size: 30px;
   font-weight: 600;
+  /* padding:  100px 0px 0px 350px; */
+  left: 0;
+  line-height: 15px;
+  margin-top: -8px;
+  position: absolute;
+  top: 50%;
+  width: 100%;
 }
 .content .links li{
   list-style: none;
@@ -208,3 +215,4 @@ nav .content .links{
 .closebtn:hover {
   color: black;
 }
+
