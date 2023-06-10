@@ -58,7 +58,7 @@
             <a href="{% url 'logout' %}">Logout</a>
           </li>
           {% endif %}
-          <div class="logo"style="text-align:right"><a href="{% url 'home' %}">ResearchLog</a></div>
+          {% comment %} <div class="logo"style="text-align:right"><a href="{% url 'home' %}">ResearchLog</a></div> {% endcomment %}
 
           {% block navbar %}{% endblock  %}
         </ul>
@@ -73,6 +73,7 @@
 
  {% block content %} {% endblock %}
 
+ {% block footer %}
 <footer>
   <div class="container">
     <div class="row">
@@ -103,6 +104,7 @@
     Copyright &copy; 2023 <span>ResearchLog</span>
   </div>
 </footer>
+{% endblock footer %}
 
  <script>
   setTimeout(function(){
